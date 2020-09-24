@@ -175,3 +175,47 @@ template <typename T>
 void Register<T>::sort(bool (Register<T>::*compare)(int a, int b)){
     return mergesort(0, int(logs.size()-1), (compare));
 }
+
+template <typename T>
+string Register<T>::get_date(int a){
+    return logs[a]->date;
+}
+
+template <typename T>
+string Register<T>::get_hname_source(int a){
+    return logs[a]->hname_source;
+}
+
+template <typename T>
+string Register<T>::get_hname_dest(int a){
+    return logs[a]->hname_dest;
+}
+
+template <typename T>
+int Register<T>::binary(string k, int first, int last, string (Register<T>::*get)(int)){
+    int ret;
+    
+    // k was not found
+    if (first > last) {
+        ret = -1;
+    }
+    
+    else{
+        int half = (first + last)/2;
+        if (k == (this->*get)(half)) {
+            ret = half;
+        }
+        else if (k < (this->*get)(half)){
+            ret = binary(k, first, half-1, get);
+        }
+        else{
+            ret = binary(k, half+1, last, get);
+        }
+    }
+    return ret;
+}
+
+template <typename T>
+int Register<T>::search(string k, string (Register<T>::*get)(int)){
+    return this->binary(k, 0, int(logs.size()-1), get);
+}

@@ -41,18 +41,35 @@ private:
     void mergesort(int l, int r, bool (Register<T>::*compare)(int a, int b));
     void merge(int l, int m, int r, bool (Register<T>::*compare)(int a, int b));
     
+    // binary search function
+    int binary(string k, int first, int last, string (Register<T>::*get)(int));
+    
 public:
     Register();
     ~Register();
     
-    // compare depending on source hostname (rebeca.reto.com)
-    bool compare_hname_source(int a, int b);
-    // compare depending on destiny hostname (freemailserver.com, but can be "-")
-    bool compare_hname_dest(int a, int b);
-    // compare depending on destiny port (int, but can be "-")
-    bool compare_port_dest(int a, int b);
+    // comparisons for sorting function
+    bool compare_hname_source(int a, int b);    // "rebeca.reto.com" or "-"
+    bool compare_hname_dest(int a, int b);      // "freemailserver.com" or "-"
+    bool compare_port_dest(int a, int b);       // int or "-"
+//    compare ips and date/time
     
+    // sorts by any function beginning in compare_
     void sort(bool (Register<T>::*compare)(int a, int b));
+    
+    // get attribute for search
+    string get_date(int a);             // "10-8-2020"
+    string get_hname_source(int a);     // "rebeca.reto.com" or "-"
+    string get_hname_dest(int a);       // "freemailserver.com" or "-"    
+//    get_network ????
+    
+    // finds attribute depending on function beginning in get_
+    int search(string k, string (Register<T>::*get)(int));
+    
+    // answer questions for report
+    void q1();
+    void q2();
+    void q3();
 };
 
 #endif /* Register_hpp */
