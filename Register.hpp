@@ -34,23 +34,25 @@ public:
 template <typename T>
 class Register{
 private:
+    // all Entries with their attributes are kept here
     vector<Entry*> logs;
     
     // mergesort functions
-    void mergesort(int l, int r, bool (*compare));
-    void merge(int l, int m, int r, bool (*compare));
+    void mergesort(int l, int r, bool (Register<T>::*compare)(int a, int b));
+    void merge(int l, int m, int r, bool (Register<T>::*compare)(int a, int b));
     
 public:
     Register();
     ~Register();
     
-    void search();
-    
-    void hname_sort(*compare_hname_dest);
-    
-    bool compare_hname_dest(int a, int b);
-    bool compare_port(int a, int b);
+    // compare depending on source hostname (rebeca.reto.com)
     bool compare_hname_source(int a, int b);
+    // compare depending on destiny hostname (freemailserver.com, but can be "-")
+    bool compare_hname_dest(int a, int b);
+    // compare depending on destiny port (int, but can be "-")
+    bool compare_port_dest(int a, int b);
+    
+    void sort(bool (Register<T>::*compare)(int a, int b));
 };
 
 #endif /* Register_hpp */

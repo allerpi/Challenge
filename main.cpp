@@ -8,11 +8,7 @@ using namespace std;
 int main(){
     Register<string> a;
     
-    // a.sort(a.compare_hname_source);
-    
-        
-//    getline(data, str);
-//    cout << str << endl;
+    a.sort(&Register<string>::compare_port_dest);
     
     return 0;
 }
