@@ -7,37 +7,50 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
-template <typename T>
 class Entry{
 public:
-    Entry<T>();
-    ~Entry<T>();
+    Entry();
+    ~Entry();
     
     // attributes
     string date;
     string time;
     string ip_source;
-    int port_source;
+    string port_source;
     string hname_source;
     string ip_dest;
-    int port_dest;
+    string port_dest;
     string hname_dest;
     
     // add a given attribute
-    void add_data(int num, T attr);
+    void add_data(int num, string attr);
 };
 
-//template <typename T>
-//class Register{
-//private:
-//    vector<Register*> logs;
-//    
-//public:
-//    Register<T>
-//    void sort();
-//};
+template <typename T>
+class Register{
+private:
+    vector<Entry*> logs;
+    
+    // mergesort functions
+    void mergesort(int l, int r, bool (*compare));
+    void merge(int l, int m, int r, bool (*compare));
+    
+public:
+    Register();
+    ~Register();
+    
+    void search();
+    
+    void hname_sort(*compare_hname_dest);
+    
+    bool compare_hname_dest(int a, int b);
+    bool compare_port(int a, int b);
+    bool compare_hname_source(int a, int b);
+};
 
 #endif /* Register_hpp */
