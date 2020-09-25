@@ -42,7 +42,7 @@ private:
     void merge(int l, int m, int r, bool (Register<T>::*compare)(int a, int b));
     
     // binary search function
-    int binary(string k, int first, int last, string (Register<T>::*get)(int));
+    int binary(T k, int first, int last, string (Register<T>::*get)(int));
     
 public:
     Register();
@@ -52,24 +52,31 @@ public:
     bool compare_hname_source(int a, int b);    // "rebeca.reto.com" or "-"
     bool compare_hname_dest(int a, int b);      // "freemailserver.com" or "-"
     bool compare_port_dest(int a, int b);       // int or "-"
-//    compare ips and date/time
     
     // sorts by any function beginning in compare_
     void sort(bool (Register<T>::*compare)(int a, int b));
     
     // get attribute for search
-    string get_date(int a);             // "10-8-2020"
+    string get_port_dest(int a);        // int or "-"
     string get_hname_source(int a);     // "rebeca.reto.com" or "-"
-    string get_hname_dest(int a);       // "freemailserver.com" or "-"    
-//    get_network ????
+    string get_hname_dest(int a);       // "freemailserver.com" or "-"
+    
+    T get_dis(int a);
     
     // finds attribute depending on function beginning in get_
-    int search(string k, string (Register<T>::*get)(int));
+    int search(T k, string (Register<T>::*get)(int));
     
     // answer questions for report
     void q1();
     void q2();
     void q3();
+    void q4();
+    void q5();
+    void q6();
+    void q7();
+    
+    // might be useful in the future
+    void sites_visited();
 };
 
 #endif /* Register_hpp */
