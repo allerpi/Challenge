@@ -1,0 +1,17 @@
+1. Amount of entries: 33299
+
+2. Second day 11-8-2020 appears 3302 times
+
+3. benjamin 
+
+4. Company network address: 192.168.193
+
+5. server.reto.com not found
+
+6. Mail services used:
+live.com
+freemailserver.com
+mail.yahoo.com
+
+7. Ports under 1000 used:
+53, 67, 80, 135, 443, 465, 993, 
