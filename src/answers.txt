@@ -4,7 +4,7 @@
 
 3. benjamin 
 
-4. Company network address: 192.168.193
+4. Company network address: 192.168.193.0
 
 5. server.reto.com not found
 

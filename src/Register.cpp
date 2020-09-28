@@ -211,11 +211,13 @@ void Register::sites_visited(){
     vector<string> v;
     v.reserve(1);
     
-    for (size_t i = 0; i < logs.size(); i++) {
+    for (size_t i = logs.size()-1; i > 0; i--) {
         if (logs[i]->hname_dest != "-") {
             if(logs[i]->hname_dest != v.back()){
                 v.push_back(logs[i]->hname_dest);
             }
+        } else{
+            break;
         }
     }
     

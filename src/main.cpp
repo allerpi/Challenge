@@ -70,7 +70,7 @@ string q4(Register &a){
     string ip = a.logs[i]->ip_source;
     
     // gets first three groups of numbers
-    ip = ip.substr(0,ip.find_last_of('.'));
+    ip = ip.substr(0,ip.find_last_of('.')) + ".0";
     
     return "\n4. Company network address: " + ip + "\n";
 }
