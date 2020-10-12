@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build main file",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-std=c++11",
+                "src/main.cpp",
+                "src/Register.cpp",
+                "src/Entry.cpp",
+                "-o",
+                "src/main.out"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group":{
+				"kind": "build",
+				"isDefault": true
+			}
+        },
+
+        {
+            "type": "shell",
+            "label": "C/C++: g++ build and run program",
+            "command": "g++",
+            "args": [
+                "-g",
+                "-std=c++11",
+                "src/main.cpp",
+                "src/Register.cpp",
+                "src/Entry.cpp",
+                "-o",
+                "src/main.out"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build"
+        }
+    ]
+}
