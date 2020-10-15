@@ -27,11 +27,12 @@ ComputerConnections::ComputerConnections(Register &r) {
 ComputerConnections::~ComputerConnections() {};
 
 void ComputerConnections::generate_ip(string home) {
+    // make random number from 1 to 150
     srand(time(0));
     int last = rand()%150 + 1;
 
+    // save new ip address in attribute ip
     home = home.substr(0, home.find_last_of('.')) + "." + to_string(last);
-
     ip = home;
 }
 
@@ -44,6 +45,7 @@ string ComputerConnections::get_last_ip() {
 }
 
 string ComputerConnections::check_dest(string dest_ip) {
+    // get first three numbers of each IP
     string home_ip = ip.substr(0, ip.find_last_of('.'));
     dest_ip = dest_ip.substr(0, dest_ip.find_last_of('.'));
 

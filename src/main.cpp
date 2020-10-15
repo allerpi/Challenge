@@ -9,6 +9,6 @@ int main(){
     cout << endl;
     Register r("data.csv");
     ComputerConnections a(r);
-    // a.print_all();
+
     cout << endl;
 }

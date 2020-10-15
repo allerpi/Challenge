@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "g++ - Build and debug main file",
+            "name": "g++ - Build and debug project",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/src/main.out",

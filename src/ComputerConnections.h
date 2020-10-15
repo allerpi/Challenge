@@ -19,6 +19,7 @@ private:
     stack<string> incoming;
     queue<string> outgoing;
 
+    // generate a random ip given the home network address
     void generate_ip(string home);
 
 public:
@@ -29,10 +30,10 @@ public:
     // return computer ip
     string get_ip() { return ip; };
 
-    // get amount of connections in stack variable
+    // get amount of connections in stack variable (incoming)
     int get_incoming_size();
 
-    // get amount of connections in queue variable
+    // get amount of connections in queue variable (outgoing)
     int get_outgoing_size();
 
     // retrieve last connection made
