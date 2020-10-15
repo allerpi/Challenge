@@ -42,7 +42,11 @@ public:
     // check if dest_ip is internal or external
     string check_dest(string dest_ip);
 
+    // prints incoming and putgoing IP addresses
     void print_all();
+    
+    // checks consecutive IP addresses
+    bool check_consecutive(int n);
 };
 
 #endif
