@@ -1,0 +1,4 @@
+1. 192.168.193.34
+2. The last IP address is 192.168.193.174 and it is Internal
+3. 258
+4. 258
