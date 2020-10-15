@@ -13,3 +13,21 @@ Program works with C++11 standard onward.
 ## To run in Terminal (bash or zsh)
 1. Open terminal in Challenge directory
 2. Run ```/bin/sh runny.sh``` command
+
+## Questions: Part 1
+1. How many registers are there in the document?
+2. How many records where registered on day 2? What day is this?
+3. Do any of the computers belong to Jeffrey, Betty, Katherine, Scott, Benjamin, Samuel or Raymond?
+4. What is the internal IP address of the company?
+5. Is any computer named "server.reto.com"?
+6. What email services are used?
+
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p1_answers.txt)
+## Questions: Part 2
+1. What IP address are you using?
+2. What was de last IP that the computer recieved? Is it internal or external?
+3. How many incoming connection does this computer have?
+4. How many outgoing connection does this computer have?
+5. Extra: Does this computer have 3 consecutive connections to the same site?
+
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p2_answers.txt)
