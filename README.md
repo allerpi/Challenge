@@ -21,7 +21,6 @@ Program works with C++11 standard onward.
 2. What was de last IP that the computer recieved? Is it internal or external?
 3. How many incoming connection does this computer have?
 4. How many outgoing connection does this computer have?
-
-Extra: Does this computer have 3 consecutive connections to the same site?
+5. Extra: Does this computer have 3 consecutive connections to the same site?
 
 Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p2_answers.txt)
