@@ -8,6 +8,7 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 #include "Entry.h"
 #include "Sort.h"
 #include "Search.h"
@@ -48,6 +49,9 @@ public:
 
     // find all ports found under a certain limit
     string dest_ports_used(int port_limit);
+
+    // find a source ip address
+    int search_ip_source(string target);
 
     // might be useful in the future
     void sites_visited();

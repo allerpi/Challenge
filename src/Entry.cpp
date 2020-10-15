@@ -88,3 +88,7 @@ bool Entry::check_if_equal_hname_dest(Entry &a, Entry &b) {
 
     return webpage_a == webpage_b;
 }
+
+bool Entry::check_if_equal_source_ip(Entry &a, Entry &b) {
+    return a.get_ip_source() == b.get_ip_source();
+}

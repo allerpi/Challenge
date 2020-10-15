@@ -3,7 +3,7 @@
 using namespace std;
 
 Register::Register(string path) {
-    cout << "Adding entries... ";
+    cout << "Adding entries... " << setw(31);
     
     ifstream data(path);
     string str;
@@ -127,4 +127,10 @@ void Register::sites_visited(){
     for (string dis : v) {
         cout << dis << endl;
     }
+}
+
+int Register::search_ip_source(string target) {
+    Entry temp;
+    temp.set_data(3, target);
+    return seq(logs, temp, &Entry::check_if_equal_source_ip);
 }

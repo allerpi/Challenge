@@ -15,7 +15,7 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: g++ build main file"
+            "preLaunchTask": "C/C++: g++ build project"
         }
     ]
 }
