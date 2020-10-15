@@ -4,3 +4,4 @@ echo BUILD COMPLETE
 cd src
 ./main.out
 rm main.out
+open ../p2_answers.txt
