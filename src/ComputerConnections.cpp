@@ -58,17 +58,45 @@ string ComputerConnections::check_dest(string dest_ip) {
 }
 
 void ComputerConnections::print_all() {
-    int size = int(incoming.size());
-    for(int i = 0; i < size; i++) {
-        cout << incoming.top() << endl;
+    // print incoming connections
+    stack<string> in = incoming;
+    for(int i = 0; i < incoming.size(); i++) {
+        cout << in.top() << endl;
+        in.pop();
     }
-    size = int(outgoing.size());
+
+    // print outgoing connections
+    queue<string> out = outgoing;
     cout << endl;
-    for(int i = 0; i < size; i++) {
-        cout << outgoing.front() << endl;
+    for(int i = 0; i < outgoing.size(); i++) {
+        cout << out.front() << endl;
+        out.pop();
     }
 }
 
 bool ComputerConnections::check_consecutive(int n) {
-    while()
+    int i = 0;
+    int count = 0;
+    queue<string> out = outgoing;
+    string curr = out.front();
+    out.pop();
+
+    while(i < outgoing.size() && count < n) {
+        // if current IP address is equal to next IP address
+        if(out.front() == curr) {
+            count++;
+        }
+        // if current IP address is different to next IP address
+        else {
+            curr = out.front();
+        }
+        out.pop();
+    }
+
+    if(count < n) {
+        return false;
+    }
+    else{
+        return true;
+    }
 }

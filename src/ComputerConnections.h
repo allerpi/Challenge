@@ -30,22 +30,22 @@ public:
     // return computer ip
     string get_ip() { return ip; };
 
-    // get amount of connections in stack variable (incoming)
+    // get amount of incoming connections (stack)
     int get_incoming_size();
 
-    // get amount of connections in queue variable (outgoing)
+    // get amount of outgoing connections (queue)
     int get_outgoing_size();
 
-    // retrieve last connection made
+    // retrieve last outgoing connection made
     string get_last_ip();
 
     // check if dest_ip is internal or external
     string check_dest(string dest_ip);
 
-    // prints incoming and putgoing IP addresses
+    // prints incoming and outgoing IP addresses
     void print_all();
     
-    // checks consecutive IP addresses
+    // checks if computer has n amount of consecutive outgoing connections
     bool check_consecutive(int n);
 };
 
