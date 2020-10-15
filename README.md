@@ -15,7 +15,14 @@ Program works with C++11 standard onward.
 2. Run ```/bin/sh runny.sh``` command
 
 ## Questions: Part 1
+1. How many registers are there in the document?
+2. How many records where registered on day 2? What day is this?
+3. Do any of the computers belong to Jeffrey, Betty, Katherine, Scott, Benjamin, Samuel or Raymond?
+4. What is the internal IP address of the company?
+5. Is any computer named "server.reto.com"?
+6. What email services are used?
 
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p1_answers.txt)
 ## Questions: Part 2
 1. What IP address are you using?
 2. What was de last IP that the computer recieved? Is it internal or external?
