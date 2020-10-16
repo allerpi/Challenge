@@ -5,23 +5,20 @@ Martha Del Río and Valeria Pineda
 
 Program works with C++11 standard onward.
 
-<details><summary> Run instructions </summary>
-
-## Terminal (bash or zsh)
+## To run in Terminal (bash or zsh)
 1. Open terminal in Challenge directory
 2. Run ```/bin/sh runny.sh``` command
 
-## VS Code
+## To run in VS Code
 1. Ruin Build Task (Command/Ctrl + Shift + B)
 2. Change directory to src/
 3. Run ```./main.out``` command in Integrated Terminal
 
-## Xcode
+## To run in Xcode
 1. Add Challenge folder to project
 2. Make sure scheme is Challenge/src (Go to Product->Scheme->Edit Scheme->In Run Options use custom working directory and add path to Challenge/src)
 3. Add Entry.cpp, Register.cpp, ComputerConnections.cpp and main.cpp to Compile Sources
 4. Run :)
-</details>
 
 <details><summary> Questions </summary>
 
