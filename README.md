@@ -33,7 +33,7 @@ Program works with C++11 standard onward.
 5. Is any computer named "server.reto.com"?
 6. What email services are used?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p1_answers.txt)
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/1_answers.txt)
 
 ## Part 2
 1. What IP address are you using?
@@ -42,6 +42,6 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p1_answe
 4. How many outgoing connections does this computer have?
 5. Extra: Does this computer have 3 consecutive connections to the same site?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/p2_answers.txt)
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/2_answers.txt)
 
 </details>
