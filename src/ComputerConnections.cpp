@@ -10,6 +10,10 @@ ComputerConnections::ComputerConnections(Register &r) {
 
     } while(r.search_ip_source(ip) < 0);
 
+    name = r.get_entry(r.search_ip_source(ip)).get_hname_source();
+    stringstream s(name);
+    getline(s,name,'.');
+
     cout << "IP GENERATED" << endl;
 
     cout << "Logging connections... " << setw(26);
@@ -60,7 +64,7 @@ string ComputerConnections::check_dest(string dest_ip) {
 void ComputerConnections::print_all() {
     // print incoming connections
     stack<string> in = incoming;
-    for(int i = 0; i < incoming.size(); i++) {
+    while(!in.empty()) {
         cout << in.top() << endl;
         in.pop();
     }
@@ -68,20 +72,19 @@ void ComputerConnections::print_all() {
     // print outgoing connections
     queue<string> out = outgoing;
     cout << endl;
-    for(int i = 0; i < outgoing.size(); i++) {
+    while(!out.empty()) {
         cout << out.front() << endl;
         out.pop();
     }
 }
 
 bool ComputerConnections::check_consecutive(int n) {
-    int i = 0;
     int count = 0;
     queue<string> out = outgoing;
     string curr = out.front();
     out.pop();
 
-    while(i < outgoing.size() && count < n) {
+    while(!out.empty() && count < n) {
         // if current IP address is equal to next IP address
         if(out.front() == curr) {
             count++;
@@ -89,6 +92,7 @@ bool ComputerConnections::check_consecutive(int n) {
         // if current IP address is different to next IP address
         else {
             curr = out.front();
+            count = 0;
         }
         out.pop();
     }

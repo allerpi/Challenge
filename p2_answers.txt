@@ -1,9 +1,9 @@
-1. 192.168.193.121
+1. IP address being used: 192.168.193.84
 
-2. The last IP address is 192.168.193.118 and it is Internal
+2. Last incoming connection is from 192.168.193.118 and it is Internal
 
-3. 2
+3. Incoming connections: 1
 
-4. 207
+4. Outgoing connections: 442
 
 5. Indeed, it do :D

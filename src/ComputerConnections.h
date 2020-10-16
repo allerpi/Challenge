@@ -24,6 +24,7 @@ private:
 
 public:
     ComputerConnections() = default;
+    // give all attributes a value based on Register
     ComputerConnections(Register &r);
     ~ComputerConnections();
 

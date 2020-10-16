@@ -12,16 +12,16 @@ int main(){
     ofstream printy("../p2_answers.txt", ios::trunc);
 
     // QUESTION 1
-    printy << "1. " << a.get_ip() << endl << endl;
+    printy << "1. IP address being used: " << a.get_ip() << endl << endl;
 
     // QUESTION 2
-    printy << "2. The last IP address is " << a.get_last_ip() << " and it is " << a.check_dest(a.get_last_ip()) << endl << endl;
+    printy << "2. Last incoming connection is from " << a.get_last_ip() << " and it is " << a.check_dest(a.get_last_ip()) << endl << endl;
     
     // QUESTION 3
-    printy << "3. " << a.get_incoming_size() << endl << endl;
+    printy << "3. Incoming connections: " << a.get_incoming_size() << endl << endl;
 
     // QUESTION 4
-    printy << "4. " << a.get_outgoing_size() << endl << endl;
+    printy << "4. Outgoing connections: " << a.get_outgoing_size() << endl << endl;
 
     // QUESTION 5
     printy << "5. ";
