@@ -6,6 +6,28 @@
             "label": "C/C++: g++ build project",
             "command": "g++",
             "args": [
+                "-std=c++11",
+                "src/main.cpp",
+                "src/Register.cpp",
+                "src/Entry.cpp",
+                "src/ComputerConnections.cpp",
+                "src/SiteAccesses.cpp",
+                "-o",
+                "src/main.out"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group":{
+				"kind": "build",
+				"isDefault": true
+			}
+        },
+        {
+            "type": "shell",
+            "label": "C/C++: g++ debug project",
+            "command": "g++",
+            "args": [
                 "-g",
                 "-std=c++11",
                 "src/main.cpp",
@@ -18,10 +40,7 @@
             "problemMatcher": [
                 "$gcc"
             ],
-            "group":{
-				"kind": "build",
-				"isDefault": true
-			}
+            "group": "build"
         }
     ]
 }

@@ -26,6 +26,8 @@ public:
     ComputerConnections() = default;
     // give all attributes a value based on Register
     ComputerConnections(Register &r);
+    // record connections based on new_ip
+    ComputerConnections(Register &r, string new_ip);
     ~ComputerConnections();
 
     // return computer ip

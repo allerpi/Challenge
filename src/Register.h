@@ -9,9 +9,12 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <map>
 #include "Entry.h"
 #include "Sort.h"
 #include "Search.h"
+#include "SiteAccesses.h"
+#include "BinarySearchTree.h"
 
 using namespace std;
 
@@ -19,6 +22,9 @@ class Register : private Sort<Entry>, private Search<Entry>{
 private:
     // all Entries with their attributes are kept here
     vector<Entry> logs;
+    string home_ip;
+
+    void set_home_ip();
 
 public:
     // constructors
@@ -55,6 +61,20 @@ public:
 
     // might be useful in the future
     void sites_visited();
+
+    // checks if IP address given is external (true) or internal (false)
+    bool is_external(string ip);
+
+    // add all external source IPs to a string vector
+    void external_ips(vector<string>& externals);
+
+    // connections to a domain on a given date
+    map<string,int>* connections_per_day(string date);
+
+    // returns top n sites at a given date
+    string top(int n, string date);
+
+
 };
 
 #endif

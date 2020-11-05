@@ -2,6 +2,7 @@
 
 using namespace std;
 
+/////////////////////////////////////////  METHODS FOR PART 1 /////////////////////////////////////////
 Register::Register(string path) {
     cout << "Adding entries... " << setw(31);
     
@@ -14,6 +15,7 @@ Register::Register(string path) {
             logs.push_back(Entry(str));
         }
         cout << "ENTRIES ADDED" << endl;
+        set_home_ip();
 
     } else{
         cout << "File couldn't be opened" << endl;
@@ -52,18 +54,24 @@ int Register::count_day(int day_n, string &date_n) {
     return count;
 }
 
-string Register::get_company_ip() {
+void Register::set_home_ip() {
     int i = 0;
     
     // searches first ip address that isn't "-"
-    while(logs[i].get_ip_source() == "-"){
+    while(logs[i].get_ip_source() == "-") {
         i++;
     }
     
     string ip = logs[i].get_ip_source();
     
-    // gets first three groups of numbers and add .0
-    ip = ip.substr(0,ip.find_last_of('.')) + ".0";
+    // gets first three groups of numbers
+    ip = ip.substr(0,ip.find_last_of('.'));
+    home_ip = ip;
+}
+
+string Register::get_company_ip() {
+    string ip = home_ip;
+    ip += ".0";
     
     return ip;
 }
@@ -108,7 +116,7 @@ string Register::dest_ports_used(int port_limit) {
     return ports;
 }
 
-void Register::sites_visited(){
+void Register::sites_visited() {
     mergesort(logs, 0, int(logs.size()-1), &Entry::compare_hname_dest);
     
     vector<string> v;
@@ -129,8 +137,103 @@ void Register::sites_visited(){
     }
 }
 
+/////////////////////////////////////////  METHODS FOR PART 2 /////////////////////////////////////////
 int Register::search_ip_source(string target) {
     Entry temp;
     temp.set_data(3, target);
     return seq(logs, temp, &Entry::check_if_equal_source_ip);
+}
+
+/////////////////////////////////////////  METHODS FOR PART 3 /////////////////////////////////////////
+bool Register::is_external(string ip) {
+    ip = ip.substr(0, ip.find_last_of('.'));
+    return ip != home_ip;
+}
+
+void Register::external_ips(vector<string>& externals) {
+    mergesort(logs, 0, int(logs.size()-1), &Entry::compare_ip_source);
+    
+    string ip = "";
+
+    // fill vector with external source IPs
+    for(int i = 0; i < get_size(); i++) {
+        ip = logs[i].get_ip_source();
+        // so IPs don't repeat
+        if(is_external(ip)) {
+            if(ip != externals.back()) {
+                externals.push_back(ip);
+            }
+        }
+    }
+}
+
+/////////////////////////////////////////  METHODS FOR PART 4 /////////////////////////////////////////
+map<string,int>* Register::connections_per_day(string date) {
+    int i = 0;
+    bool current_day = true;
+    string curr_site = "";
+    map<string,int>* answer = new map<string,int>;
+
+    // store connections per day
+    while(i < logs.size() && current_day) {
+        
+        // when date matches
+        while(logs[i].get_date() == date) {
+            
+            curr_site = logs[i].get_hname_dest();
+            // when destination hostname isn't "-"
+            if(curr_site != "-") {
+                
+                // when destination ip is external
+                if(is_external(logs[i].get_ip_dest())) {
+                    
+                    // when domain has been added to dictionary
+                    if(answer->find(curr_site) != answer->end()) {
+                        (*answer)[curr_site] += 1;
+                    }
+
+                    // when domain has *not* been added to dictionary
+                    else {
+                        (*answer)[curr_site] = 1;
+                    }
+                }
+            }
+
+            // so loop is over when all registers of the day have been analysed
+            current_day = false;
+
+            i++;
+        }
+
+        i++;
+    }
+
+    return answer;
+}
+
+string Register::top(int n, string date) {
+    map<string,int>* conn_amt = connections_per_day(date);
+    BinarySearchTree<SiteAccesses> my_tree;
+    string answer = "";
+
+    // add values to binary search tree
+    for(auto& x : *conn_amt) {
+        SiteAccesses nu(x.first, x.second);
+        my_tree.insert_node_recursive(nu, &SiteAccesses::compare_conn_amt);
+    }
+
+    // get n sites with the most visits
+    vector<SiteAccesses> top_sites;
+    top_sites.reserve(n);
+    my_tree.tree_top(n, top_sites);
+
+    // add sites to answer string
+    for(int i = 0; i < top_sites.size(); i++) {
+        answer += top_sites[i].get_hname() + ",";
+    }
+
+    answer.erase(prev(answer.end()));
+
+    delete conn_amt;
+    return answer;
 }

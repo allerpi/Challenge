@@ -49,6 +49,9 @@ public:
     // compares two ints of destination port (for sorting)
     static bool compare_port_dest(Entry &a, Entry &b);
 
+    // compares two strings of destination ip (for sorting)
+    static bool compare_ip_source(Entry &a, Entry &b);
+
     // return name of computer user
     static bool check_if_equal_hname_source(Entry &a, Entry &b);
 

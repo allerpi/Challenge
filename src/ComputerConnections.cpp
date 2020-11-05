@@ -30,6 +30,24 @@ ComputerConnections::ComputerConnections(Register &r) {
     cout << "CONNECTIONS LOGGED" << endl;
 }
 
+ComputerConnections::ComputerConnections(Register &r, string new_ip) {
+    // give attributes a value
+    ip = new_ip;
+    name = r.get_entry(r.search_ip_source(ip)).get_hname_source();
+    stringstream s(name);
+    getline(s,name,'.');
+
+    // fill up stack and queue
+    for(int i = 0; i < r.get_size(); i++) {
+        if(r.get_entry(i).get_ip_dest() == ip) {
+            incoming.push(r.get_entry(i).get_ip_source());
+        }
+        if(r.get_entry(i).get_ip_source() == ip) {
+            outgoing.push(r.get_entry(i).get_ip_dest());
+        }
+    }
+}
+
 ComputerConnections::~ComputerConnections() {};
 
 void ComputerConnections::generate_ip(string home) {

@@ -65,6 +65,10 @@ bool Entry::compare_port_dest(Entry &a, Entry &b) {
     return a.get_port_dest() > b.get_port_dest();
 }
 
+bool Entry::compare_ip_source(Entry &a, Entry &b) {
+    return a.get_ip_source() > b.get_ip_source();
+}
+
 bool Entry::check_if_equal_hname_source(Entry &a, Entry &b) {
     string name_a, name_b;
 
