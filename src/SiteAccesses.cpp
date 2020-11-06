@@ -18,3 +18,9 @@ bool SiteAccesses::is_equal_conn_amt(SiteAccesses& a, SiteAccesses& b) {
 int SiteAccesses::get_amt(SiteAccesses& a) { return a.conn_amt; }
 
 string SiteAccesses::get_hname() { return hname_dest; }
+
+int SiteAccesses::get_amt() { return conn_amt; }
+
+bool SiteAccesses::is_equal_hname_dest(SiteAccesses& a, SiteAccesses& b) {
+    return a.hname_dest == b.hname_dest;
+}

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <iomanip>
 #include <map>
+#include <set>
 #include "Entry.h"
 #include "Sort.h"
 #include "Search.h"
@@ -72,9 +73,10 @@ public:
     map<string,int>* connections_per_day(string date);
 
     // returns top n sites at a given date
-    string top(int n, string date);
+    vector<SiteAccesses>* top(int n, string date);
 
-
+    // fills out set with all unique dates
+    void get_all_dates(set<string>& dates);
 };
 
 #endif

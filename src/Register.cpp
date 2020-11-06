@@ -188,7 +188,7 @@ map<string,int>* Register::connections_per_day(string date) {
                 if(is_external(logs[i].get_ip_dest())) {
                     
                     // when domain has been added to dictionary
-                    if(answer->find(curr_site) != answer->end()) {
+                    if(answer->count(curr_site) > 0) {
                         (*answer)[curr_site] += 1;
                     }
 
@@ -211,7 +211,7 @@ map<string,int>* Register::connections_per_day(string date) {
     return answer;
 }
 
-string Register::top(int n, string date) {
+vector<SiteAccesses>* Register::top(int n, string date) {
     map<string,int>* conn_amt = connections_per_day(date);
     BinarySearchTree<SiteAccesses> my_tree;
     string answer = "";
@@ -223,17 +223,16 @@ string Register::top(int n, string date) {
     }
 
     // get n sites with the most visits
-    vector<SiteAccesses> top_sites;
-    top_sites.reserve(n);
-    my_tree.tree_top(n, top_sites);
-
-    // add sites to answer string
-    for(int i = 0; i < top_sites.size(); i++) {
-        answer += top_sites[i].get_hname() + ",";
-    }
-
-    answer.erase(prev(answer.end()));
+    vector<SiteAccesses>* top_sites = new vector<SiteAccesses>;
+    top_sites->reserve(n);
+    my_tree.tree_top(n, *top_sites);
 
     delete conn_amt;
-    return answer;
+    return top_sites;
+}
+
+void Register::get_all_dates(set<string>& dates) {
+    for(int i = 0; i < logs.size(); i += 1000) {
+        dates.insert(logs[i].get_date());
+    }
 }

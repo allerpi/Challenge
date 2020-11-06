@@ -7,7 +7,6 @@
 #define SiteAccesses_h
 
 #include <string>
-#include <iostream>
 
 using namespace std;
 
@@ -27,7 +26,16 @@ public:
     // check if amount of connections of a == b
     static bool is_equal_conn_amt(SiteAccesses& a, SiteAccesses& b);
 
+    // check if hostname of a == b
+    static bool is_equal_hname_dest(SiteAccesses& a, SiteAccesses& b);
+
+    // return amount of connections (for binary search tree)
     static int get_amt(SiteAccesses& a);
+
+    // return amount of connections
+    int get_amt();
+
+    // return hname_dest
     string get_hname();
 
 };
