@@ -41,4 +41,14 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/1_answer
 
 Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/2_answers.txt)
 
+## Part 3
+
+
+## Part 4
+1. Is there any site that stays in the top 5 every day?
+2. Is there any site that enters the top 5 one day and stays there all of the following days?
+3. Is there any site that appears in the top 5 with an amount of traffic above the norm?
+
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/4_answers.txt) 
+
 </details>
