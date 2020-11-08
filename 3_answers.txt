@@ -1,0 +1,22 @@
+1. Anomalous sites:
+f2ccnvjt8tju8bfvnfci.net
+2hpnvpyglwmol91u94jb.org
+
+2. IP addresses of anomalous sites (respectively):
+167.203.181.112
+208.34.7.190
+
+3. Computers in local network with at least one incoming connection: 254
+
+4. Unique IPs of incoming connections of 148 random computers:
+192.168.193.118
+
+5. TBD
+
+6. IP from question 4 has communicated with:
+f2ccnvjt8tju8bfvnfci.net
+2hpnvpyglwmol91u94jb.org
+
+7. First connections:
+On 17-8-2020 sharon.reto.com connected to f2ccnvjt8tju8bfvnfci.net using TCP
+On 17-8-2020 sharon.reto.com connected to 2hpnvpyglwmol91u94jb.org using TCP

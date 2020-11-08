@@ -58,8 +58,11 @@ public:
     // return first part of webpage accessed
     static bool check_if_equal_hname_dest(Entry &a, Entry &b);
 
-    // compares source ips (for search)
+    // compares source IPs (for search)
     static bool check_if_equal_source_ip(Entry &a, Entry &b);
+    
+    // compares destination IPs (for search)
+    static bool check_if_equal_dest_ip(Entry &a, Entry &b);
 };
 
 #endif

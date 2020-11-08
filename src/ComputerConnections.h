@@ -33,6 +33,9 @@ public:
     // return computer ip
     string get_ip() { return ip; };
 
+    // return name
+    string get_name() { return name; }
+
     // get amount of incoming connections (stack)
     int get_incoming_size();
 
@@ -50,6 +53,9 @@ public:
     
     // checks if computer has n amount of consecutive outgoing connections
     bool check_consecutive(int n);
+
+    // get top of stack (and delete it)
+    string get_incoming_connection();
 };
 
 #endif

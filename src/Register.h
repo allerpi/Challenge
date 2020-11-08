@@ -59,6 +59,9 @@ public:
 
     // find a source ip address
     int search_ip_source(string target);
+    
+    // find a destination ip address
+    int search_ip_dest(string target);
 
     // might be useful in the future
     void sites_visited();
@@ -67,7 +70,7 @@ public:
     bool is_external(string ip);
 
     // add all external source IPs to a string vector
-    void external_ips(vector<string>& externals);
+    void external_ips(set<string>& externals);
 
     // connections to a domain on a given date
     map<string,int>* connections_per_day(string date);

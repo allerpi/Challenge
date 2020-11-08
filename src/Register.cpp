@@ -144,25 +144,36 @@ int Register::search_ip_source(string target) {
     return seq(logs, temp, &Entry::check_if_equal_source_ip);
 }
 
+int Register::search_ip_dest(string target) {
+    Entry temp;
+    temp.set_data(6, target);
+    return seq(logs, temp, &Entry::check_if_equal_dest_ip);
+}
+
 /////////////////////////////////////////  METHODS FOR PART 3 /////////////////////////////////////////
 bool Register::is_external(string ip) {
     ip = ip.substr(0, ip.find_last_of('.'));
     return ip != home_ip;
 }
 
-void Register::external_ips(vector<string>& externals) {
-    mergesort(logs, 0, int(logs.size()-1), &Entry::compare_ip_source);
-    
+void Register::external_ips(set<string>& externals) {
     string ip = "";
 
-    // fill vector with external source IPs
+    // fill set with external source IPs
     for(int i = 0; i < get_size(); i++) {
         ip = logs[i].get_ip_source();
-        // so IPs don't repeat
-        if(is_external(ip)) {
-            if(ip != externals.back()) {
-                externals.push_back(ip);
-            }
+        // check that IP is external and not "-"
+        if(is_external(ip) && ip != "-"){
+            externals.insert(ip);
+        }
+    }
+
+    // fill set with external destination IPs
+    for(int i = 0; i < get_size(); i++) {
+        ip = logs[i].get_ip_dest();
+        // check that IP is external and not Google DNS server
+        if(is_external(ip) && ip != "8.8.8.8"){
+            externals.insert(ip);
         }
     }
 }

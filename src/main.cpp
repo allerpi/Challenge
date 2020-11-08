@@ -6,123 +6,150 @@ using namespace std;
 int main() {
     cout << endl;
     Register r("new_data.csv");
-    ofstream printy("../4_answers.txt", ios::trunc);
-    cout << "Analysing data..." << setw(33);
-
-    //////////////////////// QUESTION 1 ////////////////////////
-    // get dates
-    set<string> dates;
-    r.get_all_dates(dates);
-
-    // get top 5 sites of all dates
-    vector< vector<SiteAccesses>* > top_sites;
-    for(string day : dates) {
-        top_sites.push_back(r.top(5, day));
-    }
-
-    vector<int> traffic;
-
-    // count amount of times a site appears
-    map<string,int> appearances;
-    string curr_site = "";
-    for(int i = 0; i < top_sites.size(); i++) {
-        for(int j = 0; j < top_sites[i]->size(); j++) {
-            
-            // to calculate average
-            traffic.push_back((*top_sites[i])[j].get_amt());
-
-            curr_site = (*top_sites[i])[j].get_hname();
-            if(appearances.count(curr_site) > 0) {
-                appearances[curr_site] += 1;
-            }
-            else {
-                appearances[curr_site] = 1;
-            }
-        }
-    }
-
-    // write out answer
-    printy << "1. The following websites appear all " << dates.size() << " days:" << endl;
-    bool count = false;
-    for(auto& x : appearances) {
-        if(x.second == dates.size()) {
-            printy << x.first << endl;
-            count = true;
-        }
-    }
-    if(!count) {
-        printy << "None" << endl;
-    }
-    printy << endl;
-
-    //////////////////////// QUESTION 2 ////////////////////////
-    Search<SiteAccesses> searchy_boi;
-    vector<string> tally;
-    int cursed_size = top_sites.size() - 1;
+    cout << "Answering questions..." << setw(27);
+    ofstream printy("../3_answers.txt", ios::trunc);
     
-    // searches last two days for website name
-    for(auto& x : appearances) {
-        SiteAccesses dummy(x.first, x.second);
-        int found_in_last_day = searchy_boi.seq((*top_sites[cursed_size]), dummy, &SiteAccesses::is_equal_hname_dest);
-        int found_in_second_to_last_day = searchy_boi.seq((*top_sites[cursed_size - 1]), dummy, &SiteAccesses::is_equal_hname_dest);
-        if(found_in_last_day > -1 && found_in_second_to_last_day > -1 && x.second < dates.size()) {
-            tally.push_back(x.first);
+    ///////////////////////////////////////// QUESTION 1 /////////////////////////////////////////
+    set<string> externals;
+
+    r.external_ips(externals);
+    map<string,ComputerConnections> external_connections;
+    vector<string> shady_sites;
+    shady_sites.reserve(2);
+
+    // get all connections from external IPs
+    set<string>::iterator it;
+    for(it = externals.begin(); it != externals.end(); it++) {
+        ComputerConnections dis_computer_connectiony_boi(r, (*it));
+        external_connections[(*it)] = dis_computer_connectiony_boi;
+    }
+
+    shady_sites.push_back("f2ccnvjt8tju8bfvnfci.net");
+    shady_sites.push_back("2hpnvpyglwmol91u94jb.org");
+
+    printy << "1. Anomalous sites:" << endl;
+    for (string sus : shady_sites) {
+        printy << sus << endl;
+    }
+    printy << endl;
+    
+    ///////////////////////////////////////// QUESTION 2 /////////////////////////////////////////
+    string curr_name = "";
+
+    printy << "2. IP addresses of anomalous sites (respectively):" << endl;
+    // look for domain names in map (dictionary)
+    for(auto& x : external_connections) {
+        curr_name = x.second.get_name();
+        if(curr_name == shady_sites[0] || curr_name == shady_sites[1]) {
+            printy << x.first << endl;
+        }
+    }
+    printy << endl;
+    
+    ///////////////////////////////////////// QUESTION 3 /////////////////////////////////////////
+    int count = 0;
+    set<string> internal_conns;
+
+    printy << "3. Computers in local network with at least one incoming connection: ";
+    
+    for(int i = 0; i < r.get_size(); i++) {
+        string curr_ip = r.get_entry(i).get_ip_dest();
+
+        // check if destination IP is internal and hasn't been counted
+        if(!r.is_external(curr_ip) && internal_conns.count(curr_ip) == 0) {
+            count++;
+            internal_conns.insert(curr_ip);
+        }
+    }
+    printy << count << endl << endl;
+    
+    ///////////////////////////////////////// QUESTION 4 /////////////////////////////////////////
+    int j = 30;
+    vector<ComputerConnections> connection_log;
+
+    // get connections of up to 150 random computers
+    for(int i = 0; i < 150; i++) {
+        j += 30;
+        Entry curr_entry = r.get_entry(j);
+        // make sure it isn't DHCP server
+        if(curr_entry.get_port_dest() != 67) {
+            ComputerConnections dis_computer_connectiony_boi(r, curr_entry.get_ip_source());
+            connection_log.push_back(dis_computer_connectiony_boi);
         }
     }
 
-    // writes out answer
-    printy << "2. The following websites appear on subsequent days until the last:" << endl;
-    count = false;
-    for(string webpage : tally) {
-        printy << webpage << endl;
-        count = true;
+    // get unique incoming connection IPs
+    set<string> incoming_ips;
+    for(int i = 0; i < connection_log.size(); i++) {
+        for(j = 0; j < connection_log[i].get_incoming_size(); j++) {
+            incoming_ips.insert(connection_log[i].get_incoming_connection());
+        }
     }
-    if(!count) {
-        printy << "None" << endl;
+
+    // write out answers
+    printy << "4. Unique IPs of incoming connections of " << connection_log.size() << " random computers:" << endl;
+    for(it = incoming_ips.begin(); it != incoming_ips.end(); it++) {
+        printy << (*it) << endl;
     }
     printy << endl;
 
-    //////////////////////// QUESTION 3 ////////////////////////
-    // calculate average
-    int average = 0;
-    for (int i = 0; i < traffic.size(); i++) {
-        average += traffic[i];
-    }
-    average /= top_sites[0]->size() * top_sites.size();
+    ///////////////////////////////////////// QUESTION 5 /////////////////////////////////////////
+    printy << "5. TBD" << endl << endl;
+    // a computer in the local netowork is connecting to all the other computers in the network
+    // (probably involuntarily, because it's connecting to ALL of them)
+    
+    ///////////////////////////////////////// QUESTION 6 /////////////////////////////////////////
+    printy << "6. IP from question 4 has communicated with:" << endl;
+    vector<Entry> first_shady;
 
-    // save any website that exceeds average on any given day
-    set<string> sus_sites;
-    for(int i = 0; i < top_sites.size(); i++) {
-        for(int j = 0; j < top_sites[i]->size(); j++) {
-            if((*top_sites[i])[j].get_amt() > average) {
-                sus_sites.insert((*top_sites[i])[j].get_hname());
+    // search for every IP that matches the ones that made the connection
+    for(it = incoming_ips.begin(); it != incoming_ips.end(); it++) {
+        count = 0;
+        int i = 0;
+
+        while(i < r.get_size() && count < shady_sites.size()) {
+            Entry curr_entry = r.get_entry(i);
+            string curr_ip = curr_entry.get_ip_source();
+            if(curr_ip == *it) {
+
+                // check if the IP made any connections to the shady sites
+                if(curr_entry.get_hname_dest() == shady_sites[count]) {
+                    printy << shady_sites[count] << endl;
+                    first_shady.push_back(curr_entry);
+                    count++;
+                }
             }
+            i++;
         }
     }
 
-    // write out answer
-    printy << "3. The following websites have an unusually high amount of traffic:" << endl;
-    string ans3 = "";
-    count = false;
-    for(set<string>::iterator it = sus_sites.begin(); it != sus_sites.end(); it++) {
-        ans3 += *it + "\n";
-        count = true;
-    }
-    if(count) {
-        printy << ans3;
+    ///////////////////////////////////////// QUESTION 7 /////////////////////////////////////////
+    // ports that use UDP
+    set<int> udp = {53, 67, 68, 69, 123, 137, 138, 161, 162, 500, 514, 520, 521};
+
+    if(count == 0) {
+        printy << "None\n" << endl;
+        printy << "7. Doesn't apply";
     }
     else {
-        printy << "None";
+        printy << endl;
+        printy << "7. First connections:" << endl;
+        for(Entry shady : first_shady) {
+            // determine protocol used
+            string protocol = "TCP";
+            if(udp.count(shady.get_port_dest()) == 1) {
+                protocol = "UDP";
+            }
+            // Write out answer
+            printy << "On " << shady.get_date() << " " << shady.get_hname_source() << 
+            " connected to " << shady.get_hname_dest() << " using " << protocol << endl;
+        }
     }
 
     //////////////////////// THE END ////////////////////////
-    for(int i = 0; i < top_sites.size(); i++) {
-        delete top_sites[i];
-    }
+    cout << "QUESTIONS ANSWERED" << endl << endl;
+    cout << "Answers may be checked in 3_answers.txt\nSuccess!" << endl;
 
-    cout << "DATA ANALYSED\n" << endl;
-    cout << "Answers may be checked in 4_answers.txt\nSuccess!" << endl;
-    
     printy.close();
     cout << endl;
 }

@@ -96,3 +96,7 @@ bool Entry::check_if_equal_hname_dest(Entry &a, Entry &b) {
 bool Entry::check_if_equal_source_ip(Entry &a, Entry &b) {
     return a.get_ip_source() == b.get_ip_source();
 }
+
+bool Entry::check_if_equal_dest_ip(Entry &a, Entry &b) {
+    return a.get_ip_dest() == b.get_ip_dest();
+}
