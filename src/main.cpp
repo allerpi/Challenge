@@ -94,9 +94,7 @@ int main() {
     printy << endl;
 
     ///////////////////////////////////////// QUESTION 5 /////////////////////////////////////////
-    printy << "5. TBD" << endl << endl;
-    // a computer in the local netowork is connecting to all the other computers in the network
-    // (probably involuntarily, because it's connecting to ALL of them)
+    printy << "5. As many computers received an incoming connection from the same IP, we can assume that this was done not by a user but a bot. We consider that this IP address belongs to a bot because we really have no way of knowing if that computer is a network admin, so it’s strange that one sole computer has so many connections to so many others." << endl << endl;
     
     ///////////////////////////////////////// QUESTION 6 /////////////////////////////////////////
     printy << "6. IP from question 4 has communicated with:" << endl;
