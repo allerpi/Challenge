@@ -17,7 +17,12 @@ Program works with C++11 standard onward.
 ## To run in Xcode
 1. Add Challenge folder to project
 2. Make sure scheme is Challenge/src (Go to Product->Scheme->Edit Scheme->In Run Options use custom working directory and add path to Challenge/src)
-3. Add Entry.cpp, Register.cpp, ComputerConnections.cpp and main.cpp to Compile Sources
+3. Add the following Compile Sources: 
+   - Entry.cpp
+   - Register.cpp
+   - ComputerConnections.cpp
+   - SiteAccesses.cpp
+   - main.cpp
 4. Run :)
 
 <details><summary> Questions </summary>
@@ -42,7 +47,15 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/1_answer
 Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/2_answers.txt)
 
 ## Part 3
+1. Is there  a domain name that is anomalous?
+2. From the names found in question 1, what is their IP? How would you determinethis information in the most time-efficient way?
+3. From the computers that are part of the domain reto.com, determine the amount of IPs that have at least one incoming connection. Print the amount of computers.
+4. Select some computers that aren't server.reto.com or connect to the DHCP server. Find the unique IPs of incoming connections.
+5. Taking into account the answers of questions 3 and 4, what do you think is happening within the network?
+6. With the IPs found in question 4, determine if these have communicated with the sites from question 1.
+7. Extra: If any connections were found in question 6, determine the date and protocol used in the first connection.
 
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/3_answers.txt)
 
 ## Part 4
 1. Is there any site that stays in the top 5 every day?
