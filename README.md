@@ -64,4 +64,13 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/3_answer
 
 Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/4_answers.txt) 
 
+## Part 5
+1. Using the graph with the connections between the IPs and the internal network, determine the amount of computers that A has connected with per day. Is A the vertex that has the most outgoing connections to the internal network?
+2. Using the same graph from the first question, locate the amount of computers that have connected with A per day. Are there connections from the other computers to A?
+3. Using a graph of connections to websites, determine which computers have connected with B per day.
+4. Using the same graph from question 3, poin out how many computers have connected with C per day.
+5. Question without code: Search what a ping sweep, a DDoS, a command and control server, and a botmaster are. Do you see these elements in your data?
+
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/5_answers.txt) 
+
 </details>
