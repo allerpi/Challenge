@@ -1,7 +1,7 @@
 # Challenge
 TC1031 Programación de estructuras de datos y algoritmos fundamentales
 
-Martha Del Río and Valeria Pineda
+Martha del Río and Valeria Pineda
 
 Program works with C++11 standard onward.
 
