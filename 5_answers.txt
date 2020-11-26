@@ -1,0 +1,31 @@
+A: sharon.reto.com
+B: 2hpnvpyglwmol91u94jb.org
+C: freemailserver.com
+
+1. A has the most outgoing connections
+
+2. 0 computers connect to A
+
+3. Connections to B per day:
+10-8-2020, 0 computers connected
+11-8-2020, 0 computers connected
+12-8-2020, 0 computers connected
+13-8-2020, 0 computers connected
+14-8-2020, 0 computers connected
+17-8-2020, 34 computers connected
+18-8-2020, 34 computers connected
+19-8-2020, 34 computers connected
+20-8-2020, 34 computers connected
+21-8-2020, 34 computers connected
+
+4. Connections to C per day:
+10-8-2020, 34 computers connected
+11-8-2020, 34 computers connected
+12-8-2020, 34 computers connected
+13-8-2020, 34 computers connected
+14-8-2020, 34 computers connected
+17-8-2020, 34 computers connected
+18-8-2020, 34 computers connected
+19-8-2020, 34 computers connected
+20-8-2020, 34 computers connected
+21-8-2020, 34 computers connected

@@ -16,6 +16,7 @@
 #include "Search.h"
 #include "SiteAccesses.h"
 #include "BinarySearchTree.h"
+#include "Graph.h"
 
 using namespace std;
 
@@ -69,10 +70,13 @@ public:
     // checks if IP address given is external (true) or internal (false)
     bool is_external(string ip);
 
-    // add all external source IPs to a string vector
-    void external_ips(set<string>& externals);
+    // add all external IPs to a string set
+    set<string> get_external_ips();
 
-    // connections to a domain on a given date
+    // add all internal source IPs to a string set
+    set<string> get_internal_ips();
+
+    // connections to all domains on a given date
     map<string,int>* connections_per_day(string date);
 
     // returns top n sites at a given date
@@ -80,6 +84,15 @@ public:
 
     // fills out set with all unique dates
     void get_all_dates(set<string>& dates);
+
+    // makes a graph with all the connections within the internal network
+    Graph<string> make_graph_internals(string ip, int &flag);
+    
+    // makes a graph with all the connections outside the internal network
+    Graph<string> make_graph_externals(vector<string> &ip, vector<int*> &flag);
+    
+    // returns amount of connections given a specific date and destination IP
+    int connections_per_day(Graph<string> &g, string date, int dst);
 };
 
 #endif
