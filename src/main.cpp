@@ -1,5 +1,4 @@
-#include "ComputerConnections.h"
-#include "SiteAccesses.h"
+#include "Register.h"
 
 using namespace std;
 
@@ -23,39 +22,52 @@ int main() {
     // saves the graph node in which C is stored
     int C_node = 0;
 
+    set<string> dates = r.get_all_dates();
+    set<string>::iterator it;
+
     ///////////////////////////////////////// QUESTION 1 /////////////////////////////////////////
-    Graph<string> internal_graph = r.make_graph_internals(A, A_node);
-    if(internal_graph.most_neighbours() == A) {
-        printy << "1. A has the most outgoing connections\n" << endl;
+    vector<Graph<string> >* internal_graph = r.make_graph_internals(A, A_node);
+    int i = 0;
+    printy << "1. Outgoing connections from A:" << endl;
+    for(it = dates.begin(), i = 0; it != dates.end(); it++, i++) {
+        printy << (*it) << ": " << (*internal_graph)[i].get_node(A_node).get_adj().size()
+            << "," << ((*internal_graph)[i].most_neighbours() == A ? "" : " not") 
+            << " the most that day" << endl;
     }
-    else {
-        printy << "1. A doesn't have the most outgoing connections\n" << endl;
-    }
+    printy << endl;
     
     ///////////////////////////////////////// QUESTION 2 /////////////////////////////////////////
-    printy << "2. " << internal_graph.appearances(A_node) << " computers connect to A\n" << endl;
+    printy << "2. Incoming connections to A:" << endl;
+    for(it = dates.begin(), i = 0; it != dates.end(); it++, i++) {
+        printy << (*it) << ": " << (*internal_graph)[i].appearances(A_node) << " computers" << endl;
+    }
+    printy << endl;
     
     ///////////////////////////////////////// QUESTION 3 /////////////////////////////////////////
     printy << "3. Connections to B per day:" << endl;
     vector<string> ip {B, C};
     vector<int*> flag {&B_node, &C_node};
-    Graph<string> externals_graph = r.make_graph_externals(ip, flag);
-    set<string> dates;
-    r.get_all_dates(dates);
-    for(set<string>::iterator it = dates.begin(); it != dates.end(); it++) {
-        printy << *it << ", " << r.connections_per_day(externals_graph, *it, B_node) << " computers connected" << endl;
+    vector<Graph<string> >* externals_graph = r.make_graph_externals(ip, flag);
+    for(it = dates.begin(), i = 0; it != dates.end(); it++, i++) {
+        printy << (*it) << ": " << (*externals_graph)[i].get_node(B_node).get_adj().size() 
+            << " computers" << endl;
     }
     printy << endl;
     
     ///////////////////////////////////////// QUESTION 4 /////////////////////////////////////////
     printy << "4. Connections to C per day:" << endl;
-    for(set<string>::iterator it = dates.begin(); it != dates.end(); it++) {
-        printy << *it << ", " << r.connections_per_day(externals_graph, *it, C_node) << " computers connected" << endl;
+    for(it = dates.begin(), i = 0; it != dates.end(); it++, i++) {
+        printy << (*it) << ": " << (*externals_graph)[i].get_node(C_node).get_adj().size() 
+            << " computers" << endl;
     }
 
     //////////////////////// THE END ////////////////////////
+    delete internal_graph;
+    delete externals_graph;
     cout << "\nAnswers may be checked in 5_answers.txt\nSuccess!" << endl;
 
     printy.close();
     cout << endl;
+
+
 }

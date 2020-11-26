@@ -64,9 +64,6 @@ public:
     // find a destination ip address
     int search_ip_dest(string target);
 
-    // might be useful in the future
-    void sites_visited();
-
     // checks if IP address given is external (true) or internal (false)
     bool is_external(string ip);
 
@@ -83,13 +80,13 @@ public:
     vector<SiteAccesses>* top(int n, string date);
 
     // fills out set with all unique dates
-    void get_all_dates(set<string>& dates);
+    set<string> get_all_dates();
 
     // makes a graph with all the connections within the internal network
-    Graph<string> make_graph_internals(string ip, int &flag);
+    vector<Graph<string> >* make_graph_internals(string ip, int &flag);
     
     // makes a graph with all the connections outside the internal network
-    Graph<string> make_graph_externals(vector<string> &ip, vector<int*> &flag);
+    vector<Graph<string> >* make_graph_externals(vector<string> &ip, vector<int*> &flag);
     
     // returns amount of connections given a specific date and destination IP
     int connections_per_day(Graph<string> &g, string date, int dst);

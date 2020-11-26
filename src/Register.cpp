@@ -116,27 +116,6 @@ string Register::dest_ports_used(int port_limit) {
     return ports;
 }
 
-void Register::sites_visited() {
-    mergesort(logs, 0, int(logs.size()-1), &Entry::compare_hname_dest);
-    
-    vector<string> v;
-    v.reserve(1);
-    
-    for (size_t i = logs.size()-1; i > 0; i--) {
-        if (logs[i].get_hname_dest() != "-") {
-            if(logs[i].get_hname_dest() != v.back()){
-                v.push_back(logs[i].get_hname_dest());
-            }
-        } else{
-            break;
-        }
-    }
-    
-    for (string dis : v) {
-        cout << dis << endl;
-    }
-}
-
 /////////////////////////////////////////  METHODS FOR PART 2 /////////////////////////////////////////
 int Register::search_ip_source(string target) {
     Entry temp;
@@ -236,10 +215,12 @@ vector<SiteAccesses>* Register::top(int n, string date) {
     return top_sites;
 }
 
-void Register::get_all_dates(set<string>& dates) {
+set<string> Register::get_all_dates() {
+    set<string> dates;
     for(int i = 0; i < logs.size(); i += 1000) {
         dates.insert(logs[i].get_date());
     }
+    return dates;
 }
 
 /////////////////////////////////////////  METHODS FOR PART 5 /////////////////////////////////////////
@@ -261,96 +242,122 @@ set<string> Register::get_internal_ips() {
     return answer;
 }
 
-Graph<string> Register::make_graph_internals(string ip, int &flag) {
-    cout << "Building internals graph..." << setw(22);
+vector<Graph<string> >* Register::make_graph_internals(string ip, int &flag) {
+    cout << "Building internals graphs..." << setw(21);
 
     int j = 0;
-    Graph<string> g(true);
+    Graph<string> base_graph(true);
+    vector<Graph<string> >* graphs_per_day = new vector<Graph<string> >;
+    graphs_per_day->reserve(20);
 
-    // get unique internal IPs and put them on a map
-    // map is useful because Register only has to be looked through once
+    // get unique internal IPs
     set<string> inter_set = get_internal_ips();
+    // map is useful because Register only has to be looked through once,
+    // with the map you know the node index of each IP in the graph
     map<string, int> internals;
 
-    // add dictionary entries and add nodes to graph
-    for(set<string>::iterator it = inter_set.begin(); it != inter_set.end(); it++) {
-        internals[*it] = j;     // dictionary
-        g.add_node(*it);        // graph
-        j++;
+    // add unique internal IPs to dictionary and base graph
+    for(set<string>::iterator it = inter_set.begin(); it != inter_set.end(); it++, j++) {
+        internals[*it] = j;         // dictionary
+        base_graph.add_node(*it);   // graph
+    }
+
+    // add edges to graphs
+    string src = "";
+    string dst = "";
+    string curr_date = "";
+    string check = "";
+    map<string, int>* record = new map<string, int>;
+    for(int i = 0; i < logs.size(); i++) {
+        // a new day starts, a new graph is created
+        if(logs[i].get_date() != curr_date) {
+            // graph already contains all possible vertexes necessary
+            graphs_per_day->push_back(base_graph);
+            curr_date = logs[i].get_date();
+            delete record;
+            record = new map<string, int>;
+        }
+        else {
+            src = logs[i].get_ip_source();
+            dst = logs[i].get_ip_dest();
+            check = src + dst;
+
+            // make sure destination and source IPs are internal, and computers don't repeat
+            if(!is_external(src) && !is_external(dst) && (*record)[check] == 0) {
+                graphs_per_day->back().add_edge(internals[src], internals[dst]);
+                (*record)[check] += 1;
+            }
+        }
+    }
+    
+    flag = internals[ip];
+    delete record;
+
+    cout << "GRAPHS BUILT" << endl;
+    return graphs_per_day;
+}
+
+vector<Graph<string> >* Register::make_graph_externals(vector<string>& ip, vector<int*> &flag) {
+    cout << "Building externals graphs..." << setw(21);
+
+    Graph<string> base_graph;
+    vector<Graph<string> >* graphs_per_day = new vector<Graph<string> >;
+    set<string>::iterator it;
+    int j = 0;
+
+    // map is useful because Register only has to be looked through once
+    // with the map you know the node index of each IP in the graph
+    map<string, int> ip_dict;
+    // fill set with external destinations IPs
+    set<string> ext_ips = get_external_ips();
+    // fill set with internal destinations IPs
+    set<string> inter_ips = get_internal_ips();
+    
+    // add dictionary entries and add nodes to graph (external IPs)
+    for(it = ext_ips.begin(); it != ext_ips.end(); it++, j++) {
+        ip_dict[*it] = j;           // dictionary
+        base_graph.add_node(*it);   // graph
+    }
+
+    // add dictionary entries and add nodes to graph (internal IPs)
+    for(it = inter_ips.begin(); it != inter_ips.end(); it++, j++) {
+        ip_dict[*it] = j;           // dictionary
+        base_graph.add_node(*it);   // graph
     }
 
     // add edges to graph
     string src = "";
     string dst = "";
-    for(int i = 0; i < logs.size(); i++) {
-        src = logs[i].get_ip_source();
-        dst = logs[i].get_ip_dest();
-
-        // make sure destination and source IPs are internal
-        if(!is_external(src) && !is_external(dst)) {
-            g.add_edge(internals[src], internals[dst]);
-        }
-    }
-    
-    flag = internals[ip];
-
-    cout << "GRAPH BUILT" << endl;
-    return g;
-}
-
-Graph<string> Register::make_graph_externals(vector<string>& ip, vector<int*> &flag) {
-    cout << "Building externals graph..." << setw(22);
-
-    // map is useful because Register only has to be looked through once
-    map<string, int> ip_dict;
-    Graph<string> g;
-    
-    int j = 0;
-    
-    // fill set with external destinations IPs
-    set<string> ip_set = get_external_ips();
-    
-    // fill set with dates
-    get_all_dates(ip_set);
-    
-    // add dictionary entries and add nodes to graph
-    for(set<string>::iterator it = ip_set.begin(); it != ip_set.end(); it++) {
-        ip_dict[*it] = j;       // dictionary
-        g.add_node(*it);        // graph
-        j++;
-    }
-
-    // add edges to graph
-    string dst = "";
+    string curr_date = "";
     string check = "";
-    set<string> date_ip_src;
+    map<string, int>* record = new map<string, int>;
     for(int i = 0; i < logs.size(); i++) {
-        dst = logs[i].get_ip_dest();
-        check = logs[i].get_ip_source()+logs[i].get_date()+dst;
-        
-        // make sure destination is external and computers don't repeat
-        if(is_external(dst) && date_ip_src.count(check) < 1) {
-            g.add_edge(ip_dict[logs[i].get_date()], ip_dict[dst]);
-            date_ip_src.insert(check);
+        // a new day starts, a new graph is created
+        if(logs[i].get_date() != curr_date) {
+            // graph already contains all possible vertexes necessary
+            graphs_per_day->push_back(base_graph);
+            curr_date = logs[i].get_date();
+            delete record;
+            record = new map<string, int>;
+        }
+        else {
+            src = logs[i].get_ip_source();
+            dst = logs[i].get_ip_dest();
+            check = src + dst;
+
+            // make sure destination IP is external and computers don't repeat
+            if(is_external(dst) && (*record)[check] == 0) {
+                graphs_per_day->back().add_edge(ip_dict[src], ip_dict[dst]);
+                (*record)[check] += 1;
+            }
         }
     }
     
     for(int i = 0; i < ip.size(); i++) {
         (*flag[i]) = ip_dict[ip[i]];
     }
+    delete record;
 
-    cout << "GRAPH BUILT" << endl;
-    return g;
-}
-
-int Register::connections_per_day(Graph<string> &g, string date, int dst) {
-    int count = 0;
-    vector<int> neighbours = g.get_node(dst).get_adj();
-    for (int neighbour : neighbours) {
-        if(g.get_node(neighbour).get_val() == date) {
-            count++;
-        }
-    }
-    
-    return count;
+    cout << "GRAPHS BUILT" << endl;
+    return graphs_per_day;
 }

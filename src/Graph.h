@@ -8,8 +8,7 @@
 #include <stack>
 
 template <class T>
-class GraphVertex
-{
+class GraphVertex {
 private:
     T val;
     std::vector<int> adj;
