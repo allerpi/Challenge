@@ -7,11 +7,7 @@
             "command": "g++",
             "args": [
                 "-std=c++11",
-                "src/main.cpp",
-                "src/Register.cpp",
-                "src/Entry.cpp",
-                "src/ComputerConnections.cpp",
-                "src/SiteAccesses.cpp",
+                "src/*.cpp",
                 "-o",
                 "src/main.out"
             ],
@@ -30,11 +26,7 @@
             "args": [
                 "-g",
                 "-std=c++11",
-                "src/main.cpp",
-                "src/Register.cpp",
-                "src/Entry.cpp",
-                "src/ComputerConnections.cpp",
-                "src/SiteAccesses.cpp",
+                "src/*.cpp",
                 "-o",
                 "src/main.out"
             ],

@@ -17,7 +17,7 @@ Program works with C++11 standard onward.
 ## To run in Xcode
 1. Add Challenge folder to project
 2. Make sure scheme is Challenge/src (Go to Product->Scheme->Edit Scheme->In Run Options use custom working directory and add path to Challenge/src)
-3. Add the following Compile Sources: 
+3. Add all .cpp files to Compile Sources: 
    - Entry.cpp
    - Register.cpp
    - ComputerConnections.cpp
