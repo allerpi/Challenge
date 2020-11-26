@@ -35,7 +35,7 @@ Program works with C++11 standard onward.
 5. Is any computer named "server.reto.com"?
 6. What email services are used?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/1_answers.txt)
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/answers/1_answers.txt)
 
 ## Part 2
 1. What IP address are you using?
@@ -44,7 +44,7 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/1_answer
 4. How many outgoing connections does this computer have?
 5. Extra: Does this computer have 3 consecutive connections to the same site?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/2_answers.txt)
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/answers/2_answers.txt)
 
 ## Part 3
 1. Is there  a domain name that is anomalous?
@@ -55,14 +55,14 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/2_answer
 6. With the IPs found in question 4, determine if these have communicated with the sites from question 1.
 7. Extra: If any connections were found in question 6, determine the date and protocol used in the first connection.
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/3_answers.txt)
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/answers/3_answers.txt)
 
 ## Part 4
 1. Is there any site that stays in the top 5 every day?
 2. Is there any site that enters the top 5 one day and stays there all of the following days?
 3. Is there any site that appears in the top 5 with an amount of traffic above the norm?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/4_answers.txt) 
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/answers/4_answers.txt) 
 
 ## Part 5
 1. Using the graph with the connections between the IPs and the internal network, determine the amount of computers that A has connected with per day. Is A the vertex that has the most outgoing connections to the internal network?
@@ -71,6 +71,6 @@ Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/4_answer
 4. Using the same graph from question 3, poin out how many computers have connected with C per day.
 5. Question without code: Search what a ping sweep, a DDoS, a command and control server, and a botmaster are. Do you see these elements in your data?
 
-Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/5_answers.txt) 
+Answers: [here](https://github.com/vpinedagon2000/Challenge/blob/master/answers/5_answers.txt) 
 
 </details>
